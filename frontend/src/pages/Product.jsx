@@ -4,6 +4,7 @@ import { ShopContext } from '../context/ShopContext';
 import { assets } from '../assets/assets';
 import ReletedProduct from '../components/ReletedProduct';
 
+
 const Product = () => {
 
   const { productId } = useParams();

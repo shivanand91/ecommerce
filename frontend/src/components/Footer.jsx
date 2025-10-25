@@ -5,7 +5,7 @@ import { assets } from '../assets/assets'
 const Footer = () => {
     return (
         <footer className="">
-            <div className="mx-auto w-full max-w-screen-xl p-4 py-6 lg:py-8">
+            <div className="mx-auto w-full max-w-screen p-4 py-6 lg:py-8">
                 <div className="md:flex md:justify-between">
                     <div className="w-1/2">
                         <Link to="/" className="flex items-center">
@@ -19,7 +19,7 @@ const Footer = () => {
                     </div>
                     <div className="grid grid-cols-2 gap-8 sm:gap-6 sm:grid-cols-3">
                         <div>
-                            <h2 className="mb-6 text-sm font-semibold text-gray-900 uppercase dark:text-white">
+                            <h2 className="mb-6 text-sm font-semibold text-gray-900 uppercase">
                                 Resources
                             </h2>
                             <ul className="text-gray-500 dark:text-gray-400 font-medium">
@@ -46,11 +46,11 @@ const Footer = () => {
                             </ul>
                         </div>
                         <div>
-                            <h2 className="mb-6 text-sm font-semibold text-gray-900 uppercase dark:text-white">
+                            <h2 className="mb-6 text-sm font-semibold text-gray-900 uppercase">
                                 Follow us
                             </h2>
                             <ul className="text-gray-500 dark:text-gray-400 font-medium">
-                                <li className="mb-4">
+                                <li className="">
                                     <Link to="/" className="hover:underline">
                                         Github
                                     </Link>
@@ -60,14 +60,19 @@ const Footer = () => {
                                         Project Demo
                                     </Link>
                                 </li>
+                                <li>
+                                    <Link to="/" className="hover:underline">
+                                        Portfolio
+                                    </Link>
+                                </li>
                             </ul>
                         </div>
                         <div>
-                            <h2 className="mb-6 text-sm font-semibold text-gray-900 uppercase dark:text-white">
+                            <h2 className="mb-6 text-sm font-semibold text-gray-900 uppercase">
                                 Legal
                             </h2>
                             <ul className="text-gray-500 dark:text-gray-400 font-medium">
-                                <li className="mb-4">
+                                <li className="">
                                     <Link to="#" className="hover:underline">
                                         Privacy Policy
                                     </Link>

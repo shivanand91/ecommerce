@@ -2,6 +2,7 @@ import React, { useContext, useEffect, useState } from 'react'
 import { ShopContext } from '../context/ShopContext.jsx'
 import { assets } from '../assets/assets.js'
 import { useLocation } from 'react-router-dom'
+import { toast } from 'react-toastify'
 
 const SearchBar = () => {
     const { search, setSearch, showSearch, setShowSearch } = useContext(ShopContext)
