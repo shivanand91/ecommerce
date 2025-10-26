@@ -4,7 +4,7 @@ import { assets } from '../assets/assets'
 
 const Footer = () => {
     return (
-        <footer className="">
+        <div className="mt-14">
             <div className="mx-auto w-full max-w-screen p-4 py-6 lg:py-8">
                 <div className="md:flex md:justify-between">
                     <div className="w-1/2">
@@ -187,7 +187,7 @@ const Footer = () => {
                     </div>
                 </div>
             </div>
-        </footer>
+        </div>
     )
 }
 

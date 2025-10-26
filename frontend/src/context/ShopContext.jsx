@@ -19,27 +19,28 @@ const ShopContextProvider = (props) => {
 
     const addToCart = async (itemId, size) => {
         if (!size) {
-            toast.error("Please select the size before adding the product into cart page.", {position: "bottom-right"})
+            toast.error("Please select the size before adding the product into cart page.", { position: "bottom-right" })
         }
         else {
-            toast.success("Product successfully added to the cart.", {position: "bottom-right"})
-        }
-        let cartData = structuredClone(cartItems);
+            toast.success("Product successfully added to the cart.", { position: "bottom-right" })
+        
+            let cartData = structuredClone(cartItems);
 
-        if (cartData[itemId]) {
-            if (cartData[itemId][size]) {
-                cartData[itemId][size] += 1;
+            if (cartData[itemId]) {
+                if (cartData[itemId][size]) {
+                    cartData[itemId][size] += 1;
+                }
+                else {
+                    cartData[itemId][size] = 1;
+                }
             }
             else {
+                cartData[itemId] = {};
                 cartData[itemId][size] = 1;
             }
-        } 
-        else {
-            cartData[itemId] = {};
-            cartData[itemId][size] = 1;
-        }
 
-        setCartItems(cartData);
+            setCartItems(cartData);
+        }
     }
 
     const getCartCount = () => {
