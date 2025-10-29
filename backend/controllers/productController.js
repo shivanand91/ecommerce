@@ -5,7 +5,7 @@ import {v2 as cloudinary} from "cloudinary"
 // Function for add product
 const addProduct = async (req, res) => {
     try {
-        const { name, description, category, subCategory, sizes, bestseller } = req.body;
+        const { name, description, category, subCategory, sizes, price, bestseller } = req.body;
         
         const image1 = req.files.image1 && req.files.image1[0]
         const image2 = req.files.image2 && req.files.image2[0]
@@ -20,6 +20,10 @@ const addProduct = async (req, res) => {
                 return result.secure_url;
             })
         )
+
+        if (!name || !description || !category || !subCategory || !sizes || !price) {
+            return res.json({success: false, message: "All fields required"})
+        }
 
         const proudctData = {
             name,
@@ -45,17 +49,44 @@ const addProduct = async (req, res) => {
         res.json({success: false, message: error.message})
     }
 }
+
 // Function for list products
 const listProducts = async (req, res) => {
+    try {
+        
+        const products = await productModel.find({})
+        res.json({success: true, products})
 
+    } catch (error) {
+        console.log(error);
+        res.json({success: false, message: error.message})
+        
+    }
 }
+
 // Function for remove product
 const removeProduct = async (req, res) => {
+    try {
+        await productModel.findByIdAndDelete(req.body.id)
+        res.json({success: true, message: "Product remove successfully!"})
+    } catch (error) {
+        console.log(error);
+        res.json({success: false, message: error.message})
+    }
 
 }
+
 // Function for single product info
 const singleProduct = async (req, res) => {
+    try {
+        const { productId } = req.body;
+        const product = await productModel.findById(productId)
+        res.json({success: true, product})
 
+    } catch (error) {
+        console.log(error);
+        res.json({success: false, message: error.message})
+    }
 }
 
 export {addProduct, listProducts, removeProduct, singleProduct}
