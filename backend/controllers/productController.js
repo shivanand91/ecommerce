@@ -21,10 +21,6 @@ const addProduct = async (req, res) => {
             })
         )
 
-        if (!name || !description || !category || !subCategory || !sizes || !price) {
-            return res.json({success: false, message: "All fields required"})
-        }
-
         const proudctData = {
             name,
             description,

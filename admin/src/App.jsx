@@ -8,7 +8,8 @@ import Orders from "./pages/Orders"
 import Login from './components/Login'
 import {ToastContainer} from "react-toastify"
 
-export const backendUrl = import.meta.env.VITE_BACKEND_URL
+export const backendUrl = import.meta.env.VITE_BACKEND_URL;
+export const currency = "₹"
 
 const App = () => {
 
@@ -23,7 +24,6 @@ const App = () => {
       <ToastContainer />
       {
         token === "" ? <Login setToken={ setToken } /> :
-
           <>
             <Navbar setToken={setToken} />
             <hr />
