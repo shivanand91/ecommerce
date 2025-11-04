@@ -29,6 +29,7 @@ const ShopContextProvider = (props) => {
             toast.success("Product successfully added to the cart.", { position: "bottom-right" })
         
             let cartData = structuredClone(cartItems);
+            
 
             if (cartData[itemId]) {
                 if (cartData[itemId][size]) {
@@ -47,7 +48,7 @@ const ShopContextProvider = (props) => {
 
             if (token) {
                 try {
-                    await axios.post(backendUrl + "/api/cart/add", {itemId, size}, {headers: {token}})
+                    await axios.post(backendUrl + "/api/cart/add", { itemId, size }, { headers: { token } }) 
                 } catch (error) {
                     console.log(error);
                     toast.error(error.message)
@@ -75,10 +76,18 @@ const ShopContextProvider = (props) => {
     }
 
     const updateQuantity = async (itemId, size, quantity) => {
-
         let cartData = structuredClone(cartItems);
         cartData[itemId][size] = quantity;
         setCartItems(cartData);
+
+        if (token) {
+            try {
+                await axios.post(backendUrl + "/api/cart/update", {itemId, size, quantity}, {headers: {token}})
+            } catch (error) {
+                console.log(error);
+                toast.error(error.message)
+            }
+        }
     }
 
     const getCartAmount = () => {
@@ -119,6 +128,19 @@ const ShopContextProvider = (props) => {
         }
     }
 
+
+    const getUserData = async (token) => {
+        try {
+            const response = await axios.post(backendUrl + "/api/cart/get", {}, { headers: { token } })
+            if (response.data.success) {
+                setCartItems(response.data.cartData)
+            }
+        } catch (error) {
+            console.log(error);
+            toast.error(error.message)
+        }
+    }
+
     useEffect(() => {
         getProductsData()
     }, [])
@@ -126,12 +148,16 @@ const ShopContextProvider = (props) => {
     useEffect(() => {
         if (!token && localStorage.getItem('token')) {
             setToken(localStorage.getItem('token'))
+            getUserData(localStorage.getItem('token'))
         }
     }, [])
 
 
     const value = {
-       backendUrl, setToken, token, products, currency, deliveryCharge, search, setSearch, showSearch, setShowSearch, cartItems, setCartItems, addToCart, getCartCount, updateQuantity, getCartAmount, navigate
+        backendUrl, setToken, token, products,
+        currency, deliveryCharge, search, setSearch,
+        showSearch, setShowSearch, cartItems, setCartItems,
+        addToCart, getCartCount, updateQuantity, getCartAmount, navigate
     }
 
     return (
