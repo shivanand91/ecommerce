@@ -1,9 +1,58 @@
 import React from 'react'
+import { useEffect } from 'react'
+import { useState } from 'react'
+import axios from "axios"
+import { backendUrl } from "../App"
+import toast from "react-toastify"
+import { assets } from '../assets/assets'
 
-const Orders = () => {
+
+const Orders = ({ token }) => {
+
+  const [orders, setOrders] = useState([])
+
+  const fetchAllOrders = async () => {
+    try {
+      if (!token) {
+        return null;
+      }
+
+      const response = await axios.post(backendUrl + "/api/order/list", {}, { headers: { token } })
+      if (response.data.success) {
+        setOrders(response.data.orders)
+      } else {
+        toast.error(response.data.message)
+      }
+
+    } catch (error) {
+      console.log(error);
+      toast.error(error.message)
+    }
+  }
+
+  useEffect(() => { fetchAllOrders() }, [token])
+
   return (
     <div>
-      Orders
+      <h3>Orders Page</h3>
+      <div>
+        {
+          orders.map((order, index) => (
+            <div key={index}>
+              <img src={assets.parcel_icon} alt="" />
+              <div>
+                {orders.items.map((item, index) => {
+                  if (index === orders.items.length) {
+                    return <p key={index}>{item.name} x {item.quantity} <span>{ item.size }</span></p>
+                  } else {
+                    
+                  }
+                })}
+              </div>
+            </div>
+          ))
+        }
+      </div>
     </div>
   )
 }

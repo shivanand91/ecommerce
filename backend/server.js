@@ -20,13 +20,13 @@ app.use(cors())
 
 // api endpoints
 
-app.use("/api/user", userRouter)
-app.use("/api/product", productRouter)
-app.use("/api/cart", cartRouter)
-app.use("/api/order", orderRouter)
+app.use("/api/user", userRouter) // user
+app.use("/api/product", productRouter) // product
+app.use("/api/cart", cartRouter) // cart 
+app.use("/api/order", orderRouter) // order
 
 app.get("/", (req, res) => {
-    res.send("API Working")
+    res.send("API Working") 
 })
 
 // start server

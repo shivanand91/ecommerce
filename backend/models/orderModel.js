@@ -13,7 +13,7 @@ const orderSchema = new Schema({
         type: Number,
         required: true
     },
-    amount: {
+    address: {
         type: Object,
         required: true
     },
