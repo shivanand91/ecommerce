@@ -38,7 +38,7 @@ const PlaceOrder = () => {
       for (const items in cartItems) {
         for (const item in cartItems[items]) {
           if (cartItems[items][item] > 0) {
-            const itemInfo = structuredClone(products.find(product => product._id === items))   
+            const itemInfo = structuredClone(products.find(product => product._id === items))
             if (itemInfo) {
               itemInfo.size = item
               itemInfo.quantity = cartItems[items][item]
@@ -47,14 +47,14 @@ const PlaceOrder = () => {
           }
         }
       }
-      
+
 
       let orderData = {
         address: formData,
         items: orderItems,
         amount: getCartAmount() + deliveryCharge
       }
-      
+
 
       switch (method) {
         // api calls for cod
@@ -69,6 +69,15 @@ const PlaceOrder = () => {
             toast.error(response.data.message)
           }
           break;
+        case 'stripe':
+          const responseStripe = await axios.post(backendUrl + '/api/order/stripe', orderData, { headers: { token } })
+          if (responseStripe.data.success) {
+            const { session_url } = responseStripe.data
+            window.location.replace(session_url)
+          } else {
+            toast.error(responseStripe.data.message)
+          }
+          break
         default:
           break;
 
@@ -78,7 +87,7 @@ const PlaceOrder = () => {
     } catch (error) {
       console.log(error.message);
       toast.error(error.message)
-        
+
     }
   }
 
