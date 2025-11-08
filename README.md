@@ -59,7 +59,7 @@ https://github.com/shivanand91/ecommerce
 |-----------|----------|
 | Frontend (React) | **Vercel** |
 | Admin Panel | **Vercel** |
-| Backend (Node + Express) | **Render** |
+| Backend (Node + Express) | **Vercel** |
 | Database | **MongoDB Atlas** |
 | File Storage | **Cloudinary** |
 | Payment Events | **Stripe / Razorpay Webhooks** |
