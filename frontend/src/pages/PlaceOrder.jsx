@@ -128,8 +128,9 @@ const PlaceOrder = () => {
               <img src={assets.stripe_logo} alt="" className='h-5 mx-4' />
             </div>
             <div onClick={() => setMethod("razorpay")} className='flex items-center gap-3 px-3 cursor-pointer border p-2'>
-              <p className={`min-w-3.5 h-3.5 border rounded-full ${method === "razorpay" ? "bg-green-400" : ""}`}></p>
+              <p className={`min-w-3.5 h-3.5 border rounded-full ${method === "razorpay" ? "bg-green-400" : ""} `}></p>
               <img src={assets.razorpay_logo} alt="" className='h-5 mx-4' />
+              <p>currently unvailable</p>
             </div>
             <div onClick={() => setMethod("cod")} className='flex items-center gap-3 px-3 cursor-pointer border p-2'>
               <p className={`min-w-3.5 h-3.5 border rounded-full ${method === "cod" ? "bg-green-400" : ""}`}></p>
@@ -138,7 +139,7 @@ const PlaceOrder = () => {
           </div>
 
           <div className='w-full text-end mt-8'>
-            <button type='submit' className='bg-black text-white px-16 py-3 text-sm'>PLACE ORDER</button>
+            <button type='submit' className='bg-black text-white px-16 py-3 text-sm cursor-pointer active:scale-105'>PLACE ORDER</button>
           </div>
 
         </div>
